@@ -1,0 +1,11 @@
+*.app
+__pycache__/
+*.dat
+*.pyc
+*/data/*
+*/Data/*
+*/CWS/*
+*/Shape/*
+*/results/*
+*/.ipynb_checkpoints/*
+*config.py
