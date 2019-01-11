@@ -45,3 +45,15 @@ Contact: Brian Dew, email: brianwdew@gmail.com; twitter: @bd_econ
 
 
 (Suggestions welcome!)
+
+
+
+### Early thoughts on how to do this
+
+The bd_CPS is in pretty good shape and will serve as the engine for making calculations. However, I would prefer the end result to be a pdf file generated in LaTeX. Interactive web graphics are nice, but they look completely different depending on the screen size and browser, which just makes using them for a large scale project too much of a lift for one guy doing this without pay. 
+
+I'd like the PDF to be colorful and possibly even have a 1958/1959/1960 Topps baseball card look. 
+
+To make this easier, I'll divide the main task into several projects and each project will contain a bunch of issues. That will serve later as my notes. 
+
+Version 0.1 will be a one-page sample pdf file and the python code that generates its data. Once the number of graphics and tables grows, I will include a table of contents. I'd also like to (eventually) have a section of the document dedicated to describing how the calculations are made.
