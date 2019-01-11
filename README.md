@@ -5,7 +5,7 @@ Display economic and social indicators found in Current Population Survey microd
 
 January 11, 2019
 
-Contact: Brian Dew, email: brianwdew@gmail.com; twitter: @bd_econ
+Contact: Brian Dew, email: brian.w.dew@gmail.com; twitter: @bd_econ
 
 
 ### Draft list of indicators

@@ -2,6 +2,10 @@
 __pycache__/
 *.dat
 *.pyc
+*.log
+*.out
+*.aux
+*.synctex.gz
 */data/*
 */Data/*
 */CWS/*
