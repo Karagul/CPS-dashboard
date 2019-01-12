@@ -12,33 +12,73 @@
 %   Packages    %
 % % % % % % % % %
 
-	\usepackage[right=0.75in, 
-				left=0.75in, 
+	\usepackage[right=0.6in, 
+				left=0.6in, 
 				top=1.0in, 
 				bottom=1.0in]{geometry}
+	\usepackage{pgfplots, pgfplotstable}
 	\usepackage[rm]{roboto}
 	\usepackage[T1]{fontenc}
+	\usepackage[eulergreek]{sansmath}
 	\usepackage[letterspace=100]{microtype}
 	\usepackage{fancyhdr}
 	\usepackage{xcolor}
-	\usepackage{pgfplots, pgfplotstable}
 	\usepackage{fontawesome}
 	\usepackage[colorlinks, 
 				urlcolor=cyan!50!blue]{hyperref}
 				
-	\pgfplotsset{compat=1.16}	
-	
+	\usetikzlibrary{pgfplots.dateplot}
+
+% Line plot settings				
+	\pgfplotsset{
+		compat=1.16,
+		every tick label/.append style={
+			black!50, font=\sansmath\sffamily\footnotesize},
+		ytick style={draw=none},
+		yticklabel style={
+			text width=2em, align=right, anchor=south},
+		axis x line*=bottom,
+		axis y line=left,
+		axis line style={opacity=0},
+		ymajorgrids,
+		grid style={very thin, black!10},
+		width=10.5cm, height=6.2cm}	
+
+% Date (X) Axis Tick Marks, one tick per year, every even year labeled
+	\newcommand{\dateaxisticks}{
+		axis line style={draw=none},
+		max space between ticks=38,	 
+		xmin={1997-01-01},
+		xtick={
+			{1995-01-01},
+			{2000-01-01},
+			{2005-01-01},
+			{2010-01-01},
+			{2015-01-01}},
+	    minor xtick={
+	    	{1994-01-01}, {1996-01-01}, {1997-01-01}, {1998-01-01}, {1999-01-01},
+			{2001-01-01}, {2002-01-01}, {2003-01-01}, {2004-01-01}, 
+	    	{2006-01-01}, {2007-01-01}, {2008-01-01}, {2009-01-01},
+	      	{2011-01-01}, {2012-01-01}, {2013-01-01}, {2014-01-01},
+	      	{2016-01-01}, {2017-01-01}, {2018-01-01}, {2019-01-01}},
+	    enlarge y limits={0.08},
+	    enlarge x limits={0.12},}
+
+% End point data label
+	\newcommand{\lastpt}[1]{node[circle, 
+		minimum size=3pt, inner sep=0pt, draw, fill, pos=1](#1){};}
+
+% Heading bar	
 	\pagestyle{fancy}
 	\fancyhf{}
 	\setlength\headheight{46pt}
 	\lhead{
-		\textcolor{yellow!70!orange}{\rule[-12pt]{\textwidth}{42pt}}%
+		\textcolor{yellow!75!orange!65}{\rule[-12pt]{\textwidth}{42pt}}%
 		\hspace{-\textwidth}%
-		\textcolor{red}{\rule[-8pt]{6pt}{42pt}}
+		{\hspace{-2pt}\textcolor{red}{\rule[-8pt]{6pt}{42pt}}}
 		\textcolor{blue!90!black}{\rule[-8pt]{6pt}{42pt}}
 		\textcolor{green!70!black}{\rule[-8pt]{6pt}{42pt}}
 		\textcolor{red}{\hspace{4pt}{\huge \lsstyle \textbf{CPS \ Dashboard}}}}	
-	
 	\renewcommand{\headrulewidth}{0pt}
 	
 				
@@ -48,13 +88,13 @@
 \begin{document}
 
 \begin{minipage}{0.64\textwidth}
-\vspace{-24pt}
-{\textbf{Updated:}} \\
+\vspace{-20pt}
+\textbf{Updated:} \\
 January 11, 2019\\
 
-\textbf{Objective:} \\ Capture economic indicators from the Current Population Survey.
+\textbf{Objective:} \\ Display economic indicators from the Current Population Survey.
 
-\end{minipage}\hspace{22pt}
+\end{minipage}\hspace{30.2pt}
 \begin{minipage}{0.32\textwidth} 	\vspace{-25pt}
 \begin{tikzpicture}
 \node[draw=none, fill=black!6, inner sep=8pt,
@@ -68,7 +108,29 @@ January 11, 2019\\
 {\textcolor{red}\faGithub} : bdecon/CPS-dashboard};
 		\end{tikzpicture}
 
-
 \end{minipage}
+
+\vspace{10mm}
+
+\noindent \textcolor{yellow!75!orange!65}{\rule[-6pt]{90mm}{24pt}}
+		\hspace{-90mm}
+		\textcolor{red}{\hspace{2pt}{\large \textbf{Employed share of population, age 25 to 54}}}
+\vspace{-1pt}
+
+\hspace{-5.5mm} \begin{tikzpicture}[trim axis right, trim axis left]
+	\begin{axis}[date coordinates in=x, xticklabel={\year}, \dateaxisticks, clip=false]
+		\fill[color=black, opacity=0.04] 
+			(axis cs:2001-03-01, 74.5) rectangle (axis cs:2001-12-01, 83);	
+		\fill[color=black, opacity=0.04] 
+			(axis cs:2007-12-01, 74.5) rectangle (axis cs:2009-07-01, 83);
+		\addplot[ultra thick, color=red] 
+			table [x=DATE, y=epop, col sep=comma]{epop.csv}{}\lastpt{value};
+		\node[right, align=left, yshift=2.2mm] at (value) 
+			{\scriptsize{2018-11}\\\footnotesize{\textbf{79.3\%}}};
+		\node[right] at (axis cs:1995-01-01,75) 
+			{\scriptsize \textcolor{black!40} 12-month moving average shown};		
+	\end{axis}					
+\end{tikzpicture}
+
 
 \end{document}
