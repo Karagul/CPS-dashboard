@@ -12,14 +12,15 @@
 %   Packages    %
 % % % % % % % % %
 
-	\usepackage[right=0.6in, 
-				left=0.6in, 
-				top=1.0in, 
-				bottom=1.0in]{geometry}
+	\usepackage[right=0.5in, 
+				left=0.5in, 
+				top=0.9in, 
+				bottom=0.9in]{geometry}
 	\usepackage{pgfplots, pgfplotstable}
 	\usepackage[rm]{roboto}
 	\usepackage[T1]{fontenc}
 	\usepackage[eulergreek]{sansmath}
+	\usepackage{amsmath,amssymb}
 	\usepackage[letterspace=100]{microtype}
 	\usepackage{fancyhdr}
 	\usepackage{xcolor}
@@ -42,7 +43,7 @@
 		axis line style={opacity=0},
 		ymajorgrids,
 		grid style={very thin, black!10},
-		width=10.5cm, height=6.2cm}	
+		width=10.0cm, height=6.2cm}	
 
 % Date (X) Axis Tick Marks, one tick per year, every even year labeled
 	\newcommand{\dateaxisticks}{
@@ -68,7 +69,10 @@
 	\newcommand{\lastpt}[1]{node[circle, 
 		minimum size=3pt, inner sep=0pt, draw, fill, pos=1](#1){};}
 
-% Heading bar	
+% Read tables
+	\pgfplotstableread[header=true, col sep=comma]{epop_group.csv}\epopgrp
+
+% First page heading bar	
 	\pagestyle{fancy}
 	\fancyhf{}
 	\setlength\headheight{46pt}
@@ -77,8 +81,8 @@
 		\hspace{-\textwidth}%
 		{\hspace{-2pt}\textcolor{red}{\rule[-8pt]{6pt}{42pt}}}
 		\textcolor{blue!90!black}{\rule[-8pt]{6pt}{42pt}}
-		\textcolor{green!70!black}{\rule[-8pt]{6pt}{42pt}}
-		\textcolor{red}{\hspace{4pt}{\huge \lsstyle \textbf{CPS \ Dashboard}}}}	
+		\textcolor{green!70!blue}{\rule[-8pt]{6pt}{42pt}}
+		\textcolor{red}{\hspace{4pt}{\huge \lsstyle \textbf{CPS \ Dashboard: \ November \ 2018}}}}	
 	\renewcommand{\headrulewidth}{0pt}
 	
 				
@@ -90,11 +94,11 @@
 \begin{minipage}{0.64\textwidth}
 \vspace{-20pt}
 \textbf{Updated:} \\
-January 11, 2019\\
+\today\\
 
 \textbf{Objective:} \\ Display economic indicators from the Current Population Survey.
 
-\end{minipage}\hspace{30.2pt}
+\end{minipage}\hspace{35.2pt}
 \begin{minipage}{0.32\textwidth} 	\vspace{-25pt}
 \begin{tikzpicture}
 \node[draw=none, fill=black!6, inner sep=8pt,
@@ -110,27 +114,99 @@ January 11, 2019\\
 
 \end{minipage}
 
-\vspace{10mm}
+\vspace{3mm}
+\textbf{Contents:} \\ \indent Employment, Unemployment, Reasons for non-participation, Wages\\
 
-\noindent \textcolor{yellow!75!orange!75}{\rule[-6pt]{90mm}{24pt}}
-		\hspace{-90mm}
-		\textcolor{red}{\hspace{2pt}{\large \textbf{Employed share of population, age 25 to 54}}}
-\vspace{-1pt}
+\vspace{6mm}
+\noindent \textcolor{black!60}{\huge \textbf{Section 1: Employment}}
 
-\hspace{-5.5mm} \begin{tikzpicture}[trim axis right, trim axis left]
+\vspace{5mm}
+
+\noindent \begin{minipage}[t]{0.475\textwidth}
+
+\noindent \textcolor{blue}{\rule[-6pt]{90mm}{24pt}}
+		\vspace{-9mm}
+		
+		\hspace{1mm} \textcolor{white}{\hspace{2pt}{\large 
+			\textbf{Employed share of age 25 to 54 population}}}
+\vspace{1.1mm}
+
+\hspace{0.8mm} \begin{tikzpicture}[trim axis left, trim axis right]
 	\begin{axis}[date coordinates in=x, xticklabel={\year}, \dateaxisticks, clip=false]
 		\fill[color=black, opacity=0.04] 
 			(axis cs:2001-03-01, 74.5) rectangle (axis cs:2001-12-01, 83);	
 		\fill[color=black, opacity=0.04] 
 			(axis cs:2007-12-01, 74.5) rectangle (axis cs:2009-07-01, 83);
-		\addplot[ultra thick, color=red] 
+		\addplot[ultra thick, color=blue] 
 			table [x=DATE, y=epop, col sep=comma]{epop.csv}{}\lastpt{value};
 		\node[right, align=left, yshift=2.2mm] at (value) 
-			{\scriptsize{2018-11}\\\footnotesize{\textbf{79.3\%}}};
+			{\input{epop.txt}};
 		\node[right] at (axis cs:1995-01-01,75) 
 			{\scriptsize \textcolor{black!70}{12-month moving average shown}};		
 	\end{axis}					
 \end{tikzpicture}
+\vspace{4mm}\\
+\textbf{Employment rate trends:}
+\vspace{2mm}\\
+While the unemployment rate and labor force participation rate are influenced by the quality of unemployment benefits, the employed share of the population is not. When there are relatively few people without jobs, as was the case during the late 1990s, employers are pressured to take steps to keep their employees from leaving, knowing that they will be relatively harder to replace. Therefore, when the share of the population with jobs is high, workers have more bargaining power. \\
 
+Basically placeholder text here. Continue to document the employment rate and why it is important, include some data like the number of people employed and also provide some historical context. When did the employment rate peak? What was the employment rate in 2006? Etc.\\
 
+Does not include armed forces or institutionalized populations.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.475\textwidth}
+\noindent \textcolor{green!75!blue}{\rule[-6pt]{90mm}{24pt}}
+		\vspace{-9mm}
+		
+		\hspace{0.8mm} \textcolor{white}{\hspace{2pt}{\large 
+			\textbf{Employed share of various groups}}}
+\vspace{1.1mm}
+
+\begin{tikzpicture}[trim axis right, 
+	declare function={
+         Y(\x)={\x+floor(\x/4)};
+       }]
+	\begin{axis}[clip=false,      
+		stack negative=separate,
+		xmajorgrids,
+	    xbar=0pt, y axis line style={opacity=0},   
+	    reverse legend, ymajorgrids=false, ytick=data,
+	    tickwidth=0pt, line legend,
+		legend style={text=black!70, legend columns=3, 
+			draw=none, fill=none, at={(0.67,0.992)},
+			/tikz/every even column/.append style={column sep=0.1cm}},
+		width=10.0cm,
+		yticklabel style={xshift=22mm, yshift=1.5mm,
+			text width=4.9cm, align=left, style={black!70}, text height=1.4ex},
+		axis y line=left,
+		bar width=1.8ex, y=4.6ex, xmin=53, ymax=1.5,
+		enlarge y limits={0.03},
+		enlarge x limits={0.06},
+		nodes near coords=, nodes near coords align={horizontal},
+		every node near coord/.append style={xshift=17pt, yshift=-3pt, anchor=south,
+			font=\scriptsize\sffamily\sansmath, style={black!70, /pgf/number format/.cd,
+			fixed zerofill, precision=1}},
+		yticklabels from table={\epopgrp}{group}
+		]
+		\addplot[xbar stacked, bar shift=0pt, fill=none, draw=none] table [
+			y expr=-Y(\coordindex), x index=2] {\epopgrp};
+		\addplot[xbar stacked, bar shift=0pt, fill=green!75!blue, draw=green!75!blue] table [
+			y expr=-Y(\coordindex), x index=1] {\epopgrp};
+		\addplot[scatter, only marks, mark=square*, draw=blue, fill=white, 
+			mark size=3.5] table [
+			y expr=-Y(\coordindex), x index=3] {\epopgrp};	
+		\addplot[scatter, only marks, mark=diamond*, blue, mark size=3.5, 
+			visualization depends on=value \thisrow{Label}\as\labelval,
+    		nodes near coords=\labelval] table [
+			y expr=-Y(\coordindex), x index=4, header=true, col sep=comma] {epop_group.csv};   
+		\node[right] at (47.6,1) 
+			{\small \textcolor{black}{High school degree or less}};
+		\node[right] at (47.6,-4) 
+			{\small \textcolor{black}{Some college or associate degree}}; 
+		\node[right] at (47.6,-9) 
+			{\small \textcolor{black}{Bachelor's degree or more}}; 
+		\input{epop_grp_legend.txt}
+	\end{axis}
+\end{tikzpicture}
+\end{minipage}
 \end{document}
