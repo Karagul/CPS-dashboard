@@ -113,17 +113,17 @@
 
 \end{minipage}
 
-\vspace{-8mm}
+\vspace{-10mm}
 {\hspace{-10pt}\textcolor{red}{\rule[-1pt]{6pt}{32pt}}}
 		\textcolor{blue!90!black}{\rule[-1pt]{6pt}{24pt}}
 		\textcolor{green!70!blue}{\rule[-1pt]{6pt}{16pt}} \ \textcolor{black!60}{\LARGE \textbf{Employment}}
 
-\vspace{8mm}
+\vspace{4mm}
 
-\noindent \begin{minipage}[t]{0.475\textwidth}
+\noindent \begin{minipage}[t]{0.48\textwidth}
 
 \noindent \textcolor{blue}{\rule[-6pt]{90mm}{24pt}}
-		\vspace{-9mm}
+		\vspace{-6mm}
 		
 		\hspace{1mm} \textcolor{white}{\hspace{2pt}{\large 
 			\textbf{Employed share of age 25 to 54 population}}}
@@ -146,14 +146,12 @@
 \vspace{4mm}\\
 \textbf{Employment rate trends:}
 \vspace{2mm}\\
-While the unemployment rate and labor force participation rate are influenced by the quality of unemployment benefits, the employed share of the population is not. When there are relatively few people without jobs, as was the case during the late 1990s, employers are pressured to take steps to keep their employees from leaving, knowing that they will be relatively harder to replace. Therefore, when the share of the population with jobs is high, workers have more bargaining power. \\
+During the year ending November 2018, 79.3 percent of people age 25 to 54 were employed, compared to 78.5 percent during the prior year. The employed share of the age group peaked at 82 percent in 1999. If today's 25-54 year olds were employed at that rate, 3.4 million more would have jobs. In 2010, following the great recession, 74.6 percent of the age group were employed. If current 25-54 year olds were employed at that rate, 6 million fewer would have jobs.\\
 
-Basically placeholder text here. Continue to document the employment rate and why it is important, include some data like the number of people employed and also provide some historical context. When did the employment rate peak? What was the employment rate in 2006? Etc.\\
-
-Does not include armed forces or institutionalized populations.
+When the employment rate is high, employers are pressured to keep their employees from leaving because they are harder to replace. Therefore, when the share of the population with jobs is high, workers have more bargaining power and wage growth tends to be stronger. \textsc{Note:} these calculations do not include those in the armed forces or institutionalized populations.\\
 \end{minipage}\hfill
 \begin{minipage}[t]{0.475\textwidth}
-\noindent \textcolor{green!75!blue}{\rule[-6pt]{90mm}{24pt}}
+\noindent \textcolor{green!75!blue}{\rule[-6pt]{91mm}{24pt}}
 		\vspace{-9mm}
 		
 		\hspace{0.8mm} \textcolor{white}{\hspace{2pt}{\large 
@@ -177,7 +175,7 @@ Does not include armed forces or institutionalized populations.
 		yticklabel style={xshift=22mm, yshift=1.5mm,
 			text width=4.9cm, align=left, style={black!70}, text height=1.4ex},
 		axis y line=left,
-		bar width=1.8ex, y=4.6ex, xmin=53, ymax=1.5,
+		bar width=1.8ex, y=4.8ex, xmin=53, ymax=1.5,
 		enlarge y limits={0.03},
 		enlarge x limits={0.06},
 		nodes near coords=, nodes near coords align={horizontal},
@@ -191,9 +189,9 @@ Does not include armed forces or institutionalized populations.
 		\addplot[xbar stacked, bar shift=0pt, fill=green!75!blue, draw=green!75!blue] table [
 			y expr=-Y(\coordindex), x index=1] {\epopgrp};
 		\addplot[scatter, only marks, mark=square*, draw=blue, fill=white, 
-			mark size=3.5] table [
+			mark size=3.2] table [
 			y expr=-Y(\coordindex), x index=3] {\epopgrp};	
-		\addplot[scatter, only marks, mark=diamond*, blue, mark size=3.5, 
+		\addplot[scatter, only marks, mark=diamond*, blue, mark size=3.2, 
 			visualization depends on=value \thisrow{Label}\as\labelval,
     		nodes near coords=\labelval] table [
 			y expr=-Y(\coordindex), x index=4, header=true, col sep=comma] {epop_group.csv};   
