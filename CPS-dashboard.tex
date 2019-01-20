@@ -144,7 +144,7 @@
 \vspace{4mm}\\
 \textbf{Employment rate trends}
 \vspace{2mm}\\
-During the year ending November 2018, 79.3 percent of people age 25 to 54 were employed, compared to 78.5 percent during the prior year. The employed share of the age group peaked at 82 percent in 1999. If today's 25-54-year-olds were employed at that rate, 3.4 million more would have jobs. In 2010, following the great recession, 74.6 percent of the age group were employed. If current 25-54-year-olds were employed at that rate, 6 million fewer would have jobs.\\
+During the year ending \input{epop_latest_text.txt}percent of people age 25 to 54 were employed, compared to \input{epop_prior_val.txt}percent during the prior year. The employed share of the age group peaked at 81.6 percent in 1999. If today's 25-54-year-olds were employed at that rate, \input{epop_more_emp.txt}million more would have jobs. In 2010, following the great recession, 75.1 percent of the age group were employed. If current 25-54-year-olds were employed at that rate, \input{epop_less_emp.txt}million fewer would have jobs.\\
 
 When the employment rate is high, employers are pressured to keep their employees from leaving because they are harder to replace. Therefore, when the share of the population with jobs is high, workers have more bargaining power and wage growth tends to be stronger. \textsc{Note:} these calculations do not include those in the armed forces or institutionalized people.\\
 \end{minipage}\hfill
@@ -162,43 +162,34 @@ When the employment rate is high, employers are pressured to keep their employee
        }]
 	\begin{axis}[clip=false,      
 		stack negative=separate,
-		xmajorgrids,
-	    xbar=0pt, y axis line style={opacity=0},   
-	    reverse legend, ymajorgrids=false, ytick=data,
-	    tickwidth=0pt, line legend,
+		xmajorgrids, xbar=0pt, ymajorgrids=false, y axis line style={opacity=0},   
+	    reverse legend, ytick=data, tickwidth=0pt, line legend,
 		legend style={text=black!70, legend columns=3, 
-			draw=none, fill=none, at={(0.67,0.992)},
-			/tikz/every even column/.append style={column sep=0.1cm}},
-		width=10.0cm,
-		yticklabel style={xshift=22mm, yshift=1.5mm,
-			text width=4.9cm, align=left, style={black!70}, text height=1.4ex},
-		axis y line=left,
-		bar width=1.8ex, y=4.8ex, xmin=53, ymax=1.5,
-		enlarge y limits={0.03},
-		enlarge x limits={0.06},
+			draw=none, fill=none, at={(0.68,0.994)},
+			/tikz/every even column/.append style={column sep=0.15cm}},
+		width=10.0cm, yticklabel style={xshift=12mm, yshift=1.5mm,
+			text width=3.0cm, align=left, style={black!70}, text height=1.4ex},
+		axis y line=left, bar width=1.8ex, y=4.8ex, xmin=53, ymax=1.5,
+		enlarge y limits={0.03}, enlarge x limits={0.06},
 		nodes near coords=, nodes near coords align={horizontal},
-		every node near coord/.append style={xshift=17pt, yshift=-3pt, anchor=south,
-			font=\scriptsize\sffamily\sansmath, style={black!70, /pgf/number format/.cd,
-			fixed zerofill, precision=1}},
+		every node near coord/.append style={xshift=17pt, yshift=-3pt, 
+			anchor=south,
+			font=\scriptsize\sffamily\sansmath, style={black!70}},
 		yticklabels from table={\epopgrp}{group}
 		]
-		\addplot[xbar stacked, bar shift=0pt, fill=none, draw=none] table [
-			y expr=-Y(\coordindex), x index=2] {\epopgrp};
-		\addplot[xbar stacked, bar shift=0pt, fill=green!75!blue, draw=green!75!blue] table [
-			y expr=-Y(\coordindex), x index=1] {\epopgrp};
+		\addplot[xbar stacked, bar shift=0pt, fill=none, draw=none] 
+			table [y expr=-Y(\coordindex), x index=2] {\epopgrp};
+		\addplot[xbar stacked, bar shift=0pt, fill=green!75!blue, draw=green!75!blue] 
+			table [y expr=-Y(\coordindex), x index=1] {\epopgrp};
 		\addplot[scatter, only marks, mark=square*, draw=blue, fill=white, 
-			mark size=3.2] table [
-			y expr=-Y(\coordindex), x index=3] {\epopgrp};	
+			mark size=3.2] table [y expr=-Y(\coordindex), x index=3] {\epopgrp};	
 		\addplot[scatter, only marks, mark=diamond*, blue, mark size=3.2, 
 			visualization depends on=value \thisrow{Label}\as\labelval,
-    		nodes near coords=\labelval] table [
-			y expr=-Y(\coordindex), x index=4, header=true, col sep=comma] {epop_group.csv};   
-		\node[right] at (47.6,1) 
-			{\small \textcolor{black}{High school degree or less}};
-		\node[right] at (47.6,-4) 
-			{\small \textcolor{black}{Some college or associate degree}}; 
-		\node[right] at (47.6,-9) 
-			{\small \textcolor{black}{Bachelor's degree or more}}; 
+    		nodes near coords=\labelval] table [y expr=-Y(\coordindex), x index=4, 
+			header=true, col sep=comma] {epop_group.csv};   
+		\node[right] at (47.6,1) {\small High school degree or less};
+		\node[right] at (47.6,-4) {\small Some college or associate degree}; 
+		\node[right] at (47.6,-9) {\small Bachelor's degree or more}; 
 		\input{epop_grp_legend.txt}
 	\end{axis}
 \end{tikzpicture}
