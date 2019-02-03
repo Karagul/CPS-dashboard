@@ -3,7 +3,11 @@ Display economic and social indicators found in Current Population Survey microd
 
 ------
 
-January 11, 2019
+February 3, 2019
+
+**NOTE** This project is on hold, as I consider whether to implement it or integrate it into a revised US Macro and Markets dashboard.
+
+-----
 
 Contact: Brian Dew, email: brian.w.dew@gmail.com; twitter: @bd_econ
 
